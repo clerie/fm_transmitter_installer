@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Loading status of installation
-if [ -d "/home/pi/fm_transmitter/" ]
+if [ -f "/home/pi/fm_transmitter/fm_transmitter" ]
 then
-    status="ok"
+    statusCORE="ok"
 else
-    status="no"
+    statusCORE="no"
 fi
 
 case "$1" in 
@@ -13,9 +13,9 @@ case "$1" in
         case "$2" in
             core)
                 
-                case "$status" in
+                case "$statusCORE" in
                     ok)
-                        echo "The core is installed "
+                        echo "The core is installed"
                     ;;
                     *)
                         echo "Installing fm_transmitter..."
@@ -41,8 +41,16 @@ case "$1" in
         echo "==== fm_transmitter_installer ===="
         echo "by clerie (https://github.com/clerie/)"
         echo ""
-        echo "Add this:         to:"
-        echo "install core      run the installation of the fm_transmitter core (do this first)"
+        echo "Add this:             to:"
+        echo "install core          install the fm_transmitter core"
+        echo "                          - first step you had to do"
+        echo "                          Installation status: $statusCORE"
+        echo "install launcher      install an start-file in /home/pi/"
+        echo "                          - provides an easy to use launcher for wav and mp3"
+        echo "                          Installation status: no"
+        echo "install autorun       install an autorun-file in /etc/init.d/"
+        echo "                          - running on default values of launcher"
+        echo "                          Installation status: no"
         exit 1
     ;;
 esac
